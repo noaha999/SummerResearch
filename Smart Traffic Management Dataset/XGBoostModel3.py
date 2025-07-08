@@ -45,3 +45,5 @@ print(f"Accuracy: {accuracy * 100:.2f}%")
 explainer = shap.Explainer(model, X_train)
 shap_values = explainer(X_test)
 shap.summary_plot(shap_values[:, :, 2], X_test, feature_names=X_test.columns)
+
+hello
