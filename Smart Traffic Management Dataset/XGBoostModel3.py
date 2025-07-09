@@ -40,6 +40,13 @@ y_pred = model.predict(X_test)
 accuracy = accuracy_score(y_test, y_pred)
 print(f"Accuracy: {accuracy * 100:.2f}%")
 
+cm = confusion_matrix(y_test, y_pred)
+print("Confusion Matrix:\n", cm)
+disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=le_target.classes_)
+disp.plot(cmap='Blues')
+plt.title("Confusion Matrix")
+plt.show()
+
 xgb.plot_importance(model, importance_type='gain')
 plt.show()
 
