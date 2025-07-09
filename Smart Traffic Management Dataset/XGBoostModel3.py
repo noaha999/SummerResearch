@@ -27,7 +27,7 @@ scaler = StandardScaler()
 X_train = scaler.fit_transform(X_train)
 X_test = scaler.transform(X_test)
 
-model = xgb.XGBClassifier(eta = .001,
+model = xgb.XGBClassifier(eta = .0001,
                           n_estimators= 200,
                           max_depth= 5,
                           use_label_encoder = False,
