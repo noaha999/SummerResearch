@@ -4,7 +4,6 @@ import matplotlib.pyplot as plt
 from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder, StandardScaler
-from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 
 
 df = pd.read_csv('/Users/daddy/Downloads/smart_traffic_management_dataset.csv')
@@ -28,7 +27,7 @@ scaler = StandardScaler()
 X_train = scaler.fit_transform(X_train)
 X_test = scaler.transform(X_test)
 
-model = xgb.XGBClassifier(eta = .0001,
+model = xgb.XGBClassifier(eta = .001,
                           n_estimators= 200,
                           max_depth= 5,
                           use_label_encoder = False,
@@ -40,14 +39,6 @@ y_pred = model.predict(X_test)
 
 accuracy = accuracy_score(y_test, y_pred)
 print(f"Accuracy: {accuracy * 100:.2f}%")
-
-cm = confusion_matrix(y_test, y_pred)
-print("Confusion Matrix:\n", cm)
-disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=le_target.classes_)
-disp.plot(cmap='Blues')
-plt.title("Confusion Matrix")
-plt.show()
-
 
 xgb.plot_importance(model, importance_type='gain')
 plt.show()
