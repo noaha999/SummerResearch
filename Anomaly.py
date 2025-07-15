@@ -7,11 +7,14 @@ import matplotlib.pyplot as plt
 # Step 1: Load your dataset
 df = pd.read_csv('/Users/daddy/Downloads/Banglore_traffic_Dataset.csv')
 
+road_avg_volume = df.groupby("Road/Intersection Name")["Traffic Volume"].mean().to_dict()
+df["RoadAvgVolume"] = df["Road/Intersection Name"].map(road_avg_volume)
+
 features = [
     "Traffic Volume", "Average Speed", "Travel Time Index", "Congestion Level",
     "Road Capacity Utilization", "Incident Reports", "Environmental Impact",
     "Public Transport Usage", "Traffic Signal Compliance", "Parking Usage",
-    "Pedestrian and Cyclist Count"
+    "Pedestrian and Cyclist Count", "RoadAvgVolume"
 ]
 X = df[features]
 
@@ -29,7 +32,7 @@ df["Anomaly Label"] = df["Anomaly"].map({1: "Normal", -1: "Anomaly"})
 
 # Step 6: Visualize (2D plot example)
 plt.figure(figsize=(10, 6))
-sns.scatterplot(data=df, x="Traffic Volume", y="Average Speed", hue="Anomaly Label", palette={"Normal": "green", "Anomaly": "red"})
+sns.scatterplot(data=df, x="RoadAvgVolume", y="Average Speed", hue="Anomaly Label", palette={"Normal": "green", "Anomaly": "red"})
 plt.title("Anomaly Detection: Traffic Volume vs Speed")
 plt.grid(True)
 plt.show()
