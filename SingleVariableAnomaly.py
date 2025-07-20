@@ -4,9 +4,6 @@ from sklearn.preprocessing import StandardScaler, LabelEncoder
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-#road_avg_volume = df.groupby("Road/Intersection Name")["Traffic Volume"].mean().to_dict()
-#df["RoadAvgVolume"] = df["Road/Intersection Name"].map(road_avg_volume)
-
 df = pd.read_csv('/Users/daddy/Downloads/smart_traffic_management_dataset.csv')
 
 le_light = LabelEncoder()
@@ -35,8 +32,8 @@ df["Anomaly Label"] = df["Anomaly"].map({1: "Normal", -1: "Anomaly"})
 
 # Step 6: Visualize (2D plot example)
 plt.figure(figsize=(10, 6))
-sns.scatterplot(data=df, x="TrafficLightEncoded", y="avg_vehicle_speed", hue="Anomaly Label", palette={"Normal": "green", "Anomaly": "red"})
-plt.title("Anomaly Detection: Traffic Volume vs Speed")
+sns.scatterplot(data=df, x=range(len(df)), y="accident_reported", hue="Anomaly Label", palette={"Normal": "green", "Anomaly": "red"})
+plt.title("Anomaly Detection")
 plt.grid(True)
 plt.show()
 
